@@ -18,11 +18,11 @@ namespace lab5
         static void first()
         {
             Point[] points = InputPoints("input.txt");
-            Point p1, p2, p3;
+            Point p1, p2, p3, p1_2;
             for (int k = 0; k < points.Length - 1; k++)
             {
                 p1 = points[k];
-                Point p1_2 = points[k + 1];
+                p1_2 = points[k + 1];
                 for (int i = 0, j = i + 1; i <= points.Length - 2 && j <= points.Length - 1; i++, j++)
                 {
                     if (i == k - 1 || i == k || j == k || i == k + 1) continue;
@@ -35,29 +35,38 @@ namespace lab5
                     }
                 }
             }
+            p1 = points[points.Length - 3];
+            p1_2 = points[points.Length - 2];
+            p2 = points[points.Length-1];
+            p3 = points[0];
+            if (IsCross(p1, p1_2, p2, p3))
+            {
+                Console.WriteLine("Есть пересечение. Не простой");
+                return;
+            }
             Console.WriteLine("Нет пересечений. Простой");
 
 
-//8
-//2 1
-//1 3
-//1 6
-//3 2
-//4 2
-//6 6
-//6 3
-//5 1
+            //8
+            //2 1
+            //1 3
+            //1 6
+            //3 2
+            //4 2
+            //6 6
+            //6 3
+            //5 1
 
-//9
-//1 3
-//0 4
-//2 6
-//3 5
-//5 7
-//5 3
-//3 3
-//4 1
-//3 0
+            //9
+            //1 3
+            //0 4
+            //2 6
+            //3 5
+            //5 7
+            //5 3
+            //3 3
+            //4 1
+            //3 0
         }
         static Point GetVectorCoords(Point p1, Point p2)
         {

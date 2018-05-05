@@ -8,8 +8,8 @@ namespace Lab1
         {
             //first();
             //second();
-            //third();
-            fourth();
+            third();
+            //fourth();
             //fifth();
             Console.ReadKey();
         }
@@ -118,8 +118,18 @@ namespace Lab1
             int y4 = int.Parse(x[1]);
             Point p4 = new Point(x4, y4);
 
-            if ( IsCross(p1, p2, p3, p4) )
+            if(p1.x*p2.y==p2.x*p1.y && p3.x*p4.y==p3.y*p4.x)
+            {
+                if (CheckPointEdge(x1, y1, x3, y3, x4, y4) || CheckPointEdge(x2, y2, x3, y3, x4, y4) || CheckPointEdge(x3, y3, x1, y1, x2, y2) || CheckPointEdge(x4, y4, x1, y1, x2, y2))
+                {
+                    Console.WriteLine("Отрезки пересекаются");
+                    return;
+                }
+                Console.WriteLine("Отрезки не пересекаются");
+                return;
+            }
 
+            if ( IsCross(p1, p2, p3, p4) )
             Console.WriteLine("Отрезки пересекаются");
             else
                 Console.WriteLine("Отрезки не пересекаются");
