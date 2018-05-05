@@ -14,7 +14,7 @@ namespace Lab2
 
             Fifth();
             //Sixth();
-            Seventh();
+            //Seventh();
             //Eighth();
             Console.ReadKey();
         }
@@ -84,19 +84,34 @@ namespace Lab2
         }
         static void Fifth()
         {
+            double new_c;
+            double new_c1;
             Console.WriteLine("Введите коэффициенты a,b,c");
             string[] input = Console.ReadLine().Split(' ');
             int a = int.Parse(input[0]);
             int b = int.Parse(input[1]);
             int c = int.Parse(input[2]);
             Console.WriteLine("Введите расстояние");
-            int range = int.Parse(Console.ReadLine());
-            Point p1 = new Point(0, c);
-            double new_c =  range * Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2)) - a * p1.x - b * p1.y;
-            double new_c1 = c - new_c;
+            double range = double.Parse(Console.ReadLine());
+            if (a == 0 || b == 0)
+            {
+                new_c = c - range;
+                new_c1 = c + range;
+            }
+            else
+            {
+                Point p1 = GetPointOnLine(1, a, b, c);
+                new_c = range * Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2)) - a * p1.x - b * p1.y;
+                new_c1 = 2*c - new_c;
+            }
+            
             Console.WriteLine("{0}x + {1}y + {2} = 0", a, b, new_c);
             Console.WriteLine("{0}x + {1}y + {2} = 0", a, b, new_c1);
         }
+        static Point GetPointOnLine(int x, int a, int b, int c)
+        {
+            return new Point(x, (a * x + c) / (-b));
+        } 
         static void Sixth()
         {
             Console.WriteLine("Введите координаты вершины угла");

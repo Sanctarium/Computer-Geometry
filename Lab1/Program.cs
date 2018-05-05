@@ -6,11 +6,11 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            // first();
-            // second();
-            third();
-          //  fourth();
-           // fifth();
+            //first();
+            //second();
+            //third();
+            fourth();
+            //fifth();
             Console.ReadKey();
         }
         static void First()
@@ -101,32 +101,53 @@ namespace Lab1
             string[] x = Console.ReadLine().Split(' ');
             int x1 = int.Parse(x[0]);
             int y1 = int.Parse(x[1]);
+            Point p1 = new Point(x1, y1);
             Console.WriteLine("Введите х2 и у2");
             x = Console.ReadLine().Split(' ');
             int x2 = int.Parse(x[0]);
             int y2 = int.Parse(x[1]);
+            Point p2 = new Point(x2, y2);
             Console.WriteLine("Введите х3 и у3");
             x = Console.ReadLine().Split(' ');
             int x3 = int.Parse(x[0]);
             int y3 = int.Parse(x[1]);
+            Point p3 = new Point(x3, y3);
             Console.WriteLine("Введите х4 и у4");
             x = Console.ReadLine().Split(' ');
             int x4 = int.Parse(x[0]);
             int y4 = int.Parse(x[1]);
-            int x_n = ((x1 * y2 - x2 * y1) * (x4 - x3) - (x3 * y4 - x4 * y3) * (x2 - x1)) / ((y1 - y2) * (x4 - x3) - (y3 - y4) * (x2 - x1)); ;
-            int y_n= ((y3 - y4) * x_n - (x3 * y4 - x4 * y3)) / (x4 - x3);
-            int v1 = vector_mult(x4 - x3, y4 - y3, x1 - x3, y1 - y3);
-            int v2 = vector_mult(x4 - x3, y4 - y3, x2 - x3, y2 - y3);
-            int v3 = vector_mult(x2 - x1, y2 - y1, y3 - x1, y3 - y1);
-            int v4 = vector_mult(x2 - x1, y2 - y1, y4 - x1, y4 - y1);
-            if ((v1 * v2) <= 0 && (v3 * v4) <= 0)
-            if( (((x1 <= x_n)&&(x2 >= x_n) && (x3 <= x_n) && (x4 >= x_n))||((y1 <= y_n) && (y2 >= y_n) && (y3 <= y_n) && (y4 >= y_n))) )
+            Point p4 = new Point(x4, y4);
+
+            if ( IsCross(p1, p2, p3, p4) )
 
             Console.WriteLine("Отрезки пересекаются");
             else
                 Console.WriteLine("Отрезки не пересекаются");
         }
-
+        static int GetZ(Point v1, Point v2)
+        {
+            return v1.x * v2.y - v2.x * v1.y;
+        }
+        static Point GetVectorCoords(Point p1, Point p2)
+        {
+            return new Point(p1.x - p2.x, p1.y - p2.y);
+        }
+        static bool IsCross(Point p1, Point p2, Point p3, Point p4)
+        {
+            Point v = GetVectorCoords(p1, p2);
+            Point v1 = GetVectorCoords(p1, p3);
+            Point v2 = GetVectorCoords(p1, p4);
+            int z1 = GetZ(v, v1);
+            int z2 = GetZ(v, v2);
+            if (z1 * z2 > 0) return false;
+            v = GetVectorCoords(p3, p4);
+            v1 = GetVectorCoords(p3, p1);
+            v2 = GetVectorCoords(p3, p2);
+            z1 = GetZ(v, v1);
+            z2 = GetZ(v, v2);
+            if (z1 * z2 > 0) return false;
+            return true;
+        }
         static bool CheckPointEdge(int x, int y, int x1, int y1, int x2, int y2)
         {
             double a = (x - x1) * (y2 - y1);
