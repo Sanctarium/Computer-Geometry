@@ -8,9 +8,9 @@ namespace Lab1
         {
             // first();
             // second();
-            //third();
-            //fourth();
-            fifth();
+            third();
+          //  fourth();
+           // fifth();
             Console.ReadKey();
         }
         static void First()
@@ -70,11 +70,26 @@ namespace Lab1
             x = Console.ReadLine().Split(' ');
             double x2 = double.Parse(x[0]);
             double y2 = double.Parse(x[1]);
-            if ((y1 - a * x1 + b) * (y2 - a * x2 + b) <= 0)
-                Console.WriteLine("Прямая и отрезок пересекаются");
+            if (x1 != x2)
+            {
+                double bnew = 1 * x1 * (y2 + y1) / (x2 - x1) + y1;
+                double x_new = (bnew - b) / (a - (y2 - y1) / (x2 - x1));
+                Console.WriteLine(x_new);
+                if ((x1 >= x_new) && (x_new >= x2) || (x1 <= x_new) && (x_new <= x2))
+                    Console.WriteLine("Прямая и отрезок пересекаются");
+                else if(x_new==Double.PositiveInfinity||x_new==Double.NegativeInfinity)
+                    Console.WriteLine("Прямая и отрезок совпадают");
+                else
+                    Console.WriteLine("Прямая и отрезок не пересекаются");
+            }
             else
-                Console.WriteLine("Прямая и отрезок не пересекаются");
-
+            {
+                double y_new = a * x1 + b;
+                if ((y1 >= y_new) && (y_new >= y2) || (y1 <= y_new) && (y_new <= y2))
+                    Console.WriteLine("Прямая и отрезок пересекаются");
+                else
+                    Console.WriteLine("Прямая и отрезок не пересекаются");
+            }
         }
         private static int vector_mult(int ax, int ay, int bx, int by) //векторное произведение
         {
@@ -98,12 +113,16 @@ namespace Lab1
             x = Console.ReadLine().Split(' ');
             int x4 = int.Parse(x[0]);
             int y4 = int.Parse(x[1]);
+            int x_n = ((x1 * y2 - x2 * y1) * (x4 - x3) - (x3 * y4 - x4 * y3) * (x2 - x1)) / ((y1 - y2) * (x4 - x3) - (y3 - y4) * (x2 - x1)); ;
+            int y_n= ((y3 - y4) * x_n - (x3 * y4 - x4 * y3)) / (x4 - x3);
             int v1 = vector_mult(x4 - x3, y4 - y3, x1 - x3, y1 - y3);
             int v2 = vector_mult(x4 - x3, y4 - y3, x2 - x3, y2 - y3);
             int v3 = vector_mult(x2 - x1, y2 - y1, y3 - x1, y3 - y1);
             int v4 = vector_mult(x2 - x1, y2 - y1, y4 - x1, y4 - y1);
             if ((v1 * v2) <= 0 && (v3 * v4) <= 0)
-                Console.WriteLine("Отрезки пересекаются");
+            if( (((x1 <= x_n)&&(x2 >= x_n) && (x3 <= x_n) && (x4 >= x_n))||((y1 <= y_n) && (y2 >= y_n) && (y3 <= y_n) && (y4 >= y_n))) )
+
+            Console.WriteLine("Отрезки пересекаются");
             else
                 Console.WriteLine("Отрезки не пересекаются");
         }
@@ -131,26 +150,21 @@ namespace Lab1
         }
         static void fifth()
         {
-            //Console.WriteLine("Введите х1 и у1");
-            //string[] x = Console.ReadLine().Split(' ');
-            //int x1 = int.Parse(x[0]);
-            //int y1 = int.Parse(x[1]);
-            //Console.WriteLine("Введите х2 и у2");
-            //x = Console.ReadLine().Split(' ');
-            //int x2 = int.Parse(x[0]);
-            //int y2 = int.Parse(x[1]);
-            //Console.WriteLine("Введите х3 и у3");
-            //x = Console.ReadLine().Split(' ');
-            //int x3 = int.Parse(x[0]);
-            //int y3 = int.Parse(x[1]);
-            int x1 = 1;
-            int y1 = 1;
-            int x2 = 4;
-            int y2 = 6;
-            int x3 = 8;
-            int y3 = 1;
-            Console.WriteLine("Введите х4 и у4");
+            Console.WriteLine("Введите х1 и у1");
             string[] x = Console.ReadLine().Split(' ');
+            int x1 = int.Parse(x[0]);
+            int y1 = int.Parse(x[1]);
+            Console.WriteLine("Введите х2 и у2");
+            x = Console.ReadLine().Split(' ');
+            int x2 = int.Parse(x[0]);
+            int y2 = int.Parse(x[1]);
+            Console.WriteLine("Введите х3 и у3");
+            x = Console.ReadLine().Split(' ');
+            int x3 = int.Parse(x[0]);
+            int y3 = int.Parse(x[1]);
+
+            Console.WriteLine("Введите х4 и у4");
+             x = Console.ReadLine().Split(' ');
             int x4 = int.Parse(x[0]);
             int y4 = int.Parse(x[1]);
             if (SquareCompare(x1, y1, x2, y2, x3, y3, x4, y4))
