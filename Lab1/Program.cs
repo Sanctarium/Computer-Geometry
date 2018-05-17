@@ -8,7 +8,7 @@ namespace Lab1
         {
             //first();
             //second();
-            third();
+            //third();
             //fourth();
             //fifth();
             Console.ReadKey();
@@ -167,6 +167,7 @@ namespace Lab1
                 return true;
             return false;
         }
+
         public static double Range(int x1, int y1, int x2, int y2) => Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
         static double HalfPerimeter(int x1, int y1, int x2, int y2, int x3, int y3) =>
             (Range(x1, y1, x2, y2) + Range(x1, y1, x3, y3) + Range(x2, y2, x3, y3)) / 2;
