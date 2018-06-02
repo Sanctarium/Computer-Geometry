@@ -7,9 +7,12 @@ namespace lab3
     {
         static void Main(string[] args)
         {
-           // first();
-             //second();
+            //first();
+            //second();
             third();
+            //fourth();
+            //fifth();
+            Console.ReadKey();
         }
         static void first()
         {
@@ -22,7 +25,7 @@ namespace lab3
             Console.WriteLine("Введите координаты третьей точки");
             input = Console.ReadLine().Split(' ');
             DPoint p3 = new DPoint(int.Parse(input[0]), int.Parse(input[1]));
-            double s =( 0.5) * ((p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y));
+            double s = (0.5) * ((p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y));
             if (s == 0)
                 Console.WriteLine("Точки лежат на одной прямой");
             else Console.WriteLine("Точки не лежат на одной прямой");
@@ -53,7 +56,7 @@ namespace lab3
             Console.WriteLine("Введите координаты третьей точки");
             input = Console.ReadLine().Split(' ');
             Point p3 = new Point(int.Parse(input[0]), int.Parse(input[1]));
-            double d, mx, sr, mn,e;
+            double d, mx, sr, mn, e;
             double p1_p2 = Range(p1.x, p1.y, p2.x, p2.y);
             double p2_p3 = Range(p2.x, p2.y, p3.x, p3.y);
             double p3_p1 = Range(p3.x, p3.y, p1.x, p1.y);
@@ -65,14 +68,14 @@ namespace lab3
                 mx = p3_p1;
             if (p1_p2 < p2_p3)
                 mn = p1_p2;
-            else mn= p2_p3;
-            if( p3_p1 < mn)
-                mn= p3_p1;
+            else mn = p2_p3;
+            if (p3_p1 < mn)
+                mn = p3_p1;
             sr = p1_p2 + p2_p3 + p3_p1 - mx - mn;
             d = mn * mn + sr * sr;
             e = mx * mx;
-            if (d-e>0.01) Console.WriteLine("Это остроугольный треугольник");
-            else if(d-e<-0.01) Console.WriteLine("Это тупоугольный треугольник");
+            if (d - e > 0.01) Console.WriteLine("Это остроугольный треугольник");
+            else if (d - e < -0.01) Console.WriteLine("Это тупоугольный треугольник");
             else Console.WriteLine("Это прямоугольный треугольник");
         }
         static void fourth()
@@ -86,19 +89,42 @@ namespace lab3
             Point p2 = new Point(int.Parse(input[0]), int.Parse(input[1]));
             double r2 = int.Parse(input[2]);
             double Oo = Range(p1.x, p1.y, p2.x, p2.y);
-            if (Oo==0&&r1==r2)
-            { Console.WriteLine("Окружности совпадают"); return; } 
-            else
+            if (Oo == 0 && r1 == r2)
+            { Console.WriteLine("Окружности совпадают"); return; }
+            if (Oo == 0 && r1 != r2)
             { Console.WriteLine("Окружность лежит в другой"); return; }
             if (Oo > r1 + r2)
             { Console.WriteLine("Окружности не пересекаются"); return; }
             if (Oo == r1 + r2)
+            { Console.WriteLine("Окружности касаются"); return; }
+            if (Oo < r1 + r2)
+            { Console.WriteLine("Окружности пересекаются в двух точках"); return; }
+        }
+        static void fifth()
+        {
+            Console.WriteLine("Введите координаты центра окружности и её радиус");
+            string[] input = Console.ReadLine().Split();
+            int x0 = int.Parse(input[0]);
+            int y0 = int.Parse(input[1]);
+            int r = int.Parse(input[2]);
+            Console.WriteLine("Введите коэффициенты для уравнения прямой");
+            input = Console.ReadLine().Split();
+            int a = int.Parse(input[0]);
+            int b = int.Parse(input[1]);
+            int c = int.Parse(input[2]);
+            int range = Convert.ToInt32((Math.Abs(a * x0 + b * y0 + c) / (Math.Sqrt(a * a + b * b))));
+            if (range > r)
             {
-
+                Console.WriteLine("Общих точек нет");
             }
-
-
-
+            if (range == r)
+            {
+                Console.WriteLine("Одна общая точка");
+            }
+            if (range < r)
+            {
+                Console.WriteLine("Две общие точки");
+            }
         }
     }
 }

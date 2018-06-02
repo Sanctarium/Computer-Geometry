@@ -12,7 +12,7 @@ namespace lab4
         static void Main(string[] args)
         {
             //First();
-            Second();
+            //Second();
             Console.ReadKey();
         }
         public static void First()
@@ -23,9 +23,9 @@ namespace lab4
             Line line = new Line(0, 0, 0, 0), maxLine = new Line(0, 0, 0, 0);
             Line[] lines = new Line[n];
             Random r = new Random();
-            lines[0] = new Line(-2, 2, -2, 6);
+            lines[0] = new Line(-2, -2, 6, -2);
             lines[1] = new Line(-1, 7, 5, 7);
-            lines[2] = new Line(6, 6, 6, 2);
+            lines[2] = new Line(6, 6, 2, 6);
             lines[3] = new Line(5, 1, -1, 1);
             //for (int i = 0; i < n; i++)
             //{
@@ -33,7 +33,7 @@ namespace lab4
             //    Console.WriteLine("{0}. ({1},{2}) ({3},{4})", i, lines[i].p1.x, lines[i].p1.y, lines[i].p2.x, lines[i].p2.y);
             //}
 
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 1000000; i++)
             {
                 line.p1.x = r.Next(-100, 100);
                 line.p1.y = r.Next(-100, 100);
